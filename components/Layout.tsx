@@ -13,9 +13,8 @@ export default function Layout({ children }: Props) {
       bg-slate-100 dark:bg-slate-800
       overflow-x-hidden overflow-y-auto'>
       <Navbar />
-      <main className='grow border border-white'>
-        {children}
-      </main>
+      {/* Inject main content into here */}
+      {children}
       <Footer />
     </div>
   );
