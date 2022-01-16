@@ -8,6 +8,9 @@ module.exports = {
         title: ["Luminari"],
         slogan: ["'Lucida Console'", "monospace"],
       },
+      screens: {
+        tiny: "475px",
+      },
     },
   },
   plugins: [],
