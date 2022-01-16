@@ -1,10 +1,14 @@
-import 'tailwindcss/tailwind.css';
-import '../styles/globals.css';
-import type { AppProps } from 'next/app';
-import { ThemeProvider } from 'next-themes';
+import "tailwindcss/tailwind.css";
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import { ThemeProvider } from "next-themes";
 
+// Seems like CSS classes can't be scoped, but we can organise them here
+import "../styles/navbar.css";
+import "../styles/dashboard.css";
+import "../styles/footer.css";
 
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
