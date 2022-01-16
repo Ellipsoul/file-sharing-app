@@ -45,7 +45,7 @@ export default function Actions(): ReactElement {
         <Button
           className="
           px-4 py-2 rounded-xl hidden tiny:flex flex-col
-          bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-100"
+          bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
           variant="contained"
           color="primary">
           <DashboardRoundedIcon
@@ -66,7 +66,7 @@ export default function Actions(): ReactElement {
         <Button
           className="
           px-4 py-2 rounded-xl hidden tiny:flex flex-col
-          bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-100"
+          bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
           variant="contained"
           color="primary">
           <InfoRoundedIcon
@@ -94,7 +94,7 @@ export default function Actions(): ReactElement {
       <Button
         className="
           p-2 md:p-4 rounded-xl md:rounded-full hidden tiny:block
-          bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-100"
+          bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
         variant="contained"
         color="primary"
         onClick={toggleTheme}

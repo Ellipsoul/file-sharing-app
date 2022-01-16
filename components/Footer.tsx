@@ -1,9 +1,14 @@
-import React from 'react';
+import React from "react";
 
 export default function Footer() {
   return (
-    <footer className='bg-purple-300 dark:bg-purple-800'>
-      Footer
+    <footer className='
+      bg-slate-200 dark:bg-slate-900 w-full h-12
+      flex flex-row justify-between items-center
+      font-slogan text-lg px-6
+    '>
+      <span>Aron Teh</span>
+      <span>2022</span>
     </footer>
   );
 }
