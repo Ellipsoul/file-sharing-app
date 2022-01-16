@@ -9,7 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import FolderSharedRoundedIcon from "@mui/icons-material/FolderSharedRounded";
 import MenuIcon from "@mui/icons-material/Menu";
 import Divider from "@mui/material/Divider";
 
@@ -37,27 +37,26 @@ export default function Actions(): ReactElement {
     setAnchorEl(null);
   };
 
-
   return (
     <>
-      {/* Main dashbaord page */}
-      <Link href="/dashboard">
+      {/* Main app page */}
+      <Link href="/app">
         <Button
           className="
           px-4 py-2 rounded-xl hidden tiny:flex flex-col
           bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
           variant="contained"
           color="primary">
-          <DashboardRoundedIcon
+          <FolderSharedRoundedIcon
             className="text-slate-100 dark:text-slate-800 block md:hidden"
             fontSize="large"
           />
-          <DashboardRoundedIcon
+          <FolderSharedRoundedIcon
             className="text-slate-100 dark:text-slate-800 hidden md:block"
             fontSize="medium"
           />
           <span className="text-white dark:text-slate-800 hidden md:block text-lg">
-            Dashboard
+            App
           </span>
         </Button>
       </Link>
@@ -123,8 +122,8 @@ export default function Actions(): ReactElement {
           "aria-labelledby": "basic-button",
         }}
       >
-        <Link href="/dashboard">
-          <MenuItem onClick={closeMenu}>Dashboard</MenuItem>
+        <Link href="/app">
+          <MenuItem onClick={closeMenu}>App</MenuItem>
         </Link>
         <Link href="/about">
           <MenuItem onClick={closeMenu}>About</MenuItem>
