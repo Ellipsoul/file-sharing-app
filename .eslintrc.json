@@ -27,6 +27,8 @@
     "no-unused-vars": 0,
     "max-len": ["error",{"code": 100, "ignoreUrls": true}],
     "react/react-in-jsx-scope": 0,
-    "quotes": [2, "double", { "avoidEscape": true }]
+    "quotes": [2, "double", { "avoidEscape": true }],
+    "indent": 0,
+    "@typescript-eslint/indent": ["error", 2]
   }
 }
