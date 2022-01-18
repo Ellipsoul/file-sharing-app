@@ -1,7 +1,7 @@
-@import '@fontsource/roboto/300.css';
-@import '@fontsource/roboto/400.css';
-@import '@fontsource/roboto/500.css';
-@import '@fontsource/roboto/700.css';
+@import "@fontsource/roboto/300.css";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
 
 @tailwind base;
 @tailwind components;
@@ -16,4 +16,11 @@
 }
 
 @layer components {
+  .file-uploader {
+    @apply flex items-center justify-center grow min-h-48 min-w-full !important;
+    @apply bg-neutral-200 dark:bg-neutral-700;
+    @apply font-slogan font-extrabold text-white;
+    @apply border-4 border-dashed;
+    @apply cursor-pointer;
+  }
 }

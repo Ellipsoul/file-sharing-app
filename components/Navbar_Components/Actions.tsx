@@ -14,26 +14,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Divider from "@mui/material/Divider";
 
 export default function Actions(): ReactElement {
-  // Anchors the menu so button click opens it
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-
-  // Handle menu button click
-  const openMenu = (event: any) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  // Handle menu close
-  const closeMenu = () => {
-    setAnchorEl(null);
-  };
-
-
   // Handle theme in top navigation bar
   const { theme, setTheme } = useTheme();
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
-    closeMenu();
+    // closeMenu();
   };
 
   const loaded = useLoaded(); // Custom hook to check if the page is loaded
@@ -106,6 +91,20 @@ export default function Actions(): ReactElement {
   };
 
   const ActionsMenu = () => {
+    // Handle menu close
+    const closeMenu = () => {
+      setAnchorEl(null);
+    };
+
+    // Anchors the menu so button click opens it
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+
+    // Handle menu button click
+    const openMenu = (event: any) => {
+      setAnchorEl(event.currentTarget);
+    };
+
     return (
       <>
         <Button
