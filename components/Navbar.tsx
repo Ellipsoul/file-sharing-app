@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import AppBar from "@mui/material/AppBar";
 
 import Title from "./Navbar_Components/Title";

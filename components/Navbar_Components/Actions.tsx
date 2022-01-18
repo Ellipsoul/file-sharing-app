@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useLoaded } from "../../hooks/Loaded";

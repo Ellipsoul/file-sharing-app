@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 import { auth, googleAuthProvider } from "../lib/firebase";
 import { signInWithPopup } from "firebase/auth";
