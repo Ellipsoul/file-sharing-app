@@ -3,6 +3,7 @@ import "../styles/globals.css";
 
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "react-hot-toast";
 
 import Layout from "../components/Layout";
 import Metatags from "../components/Metatags";
@@ -15,6 +16,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <Toaster toastOptions={{
+        position: "top-center",
+        duration: 3000,
+        style: {
+          fontSize: "1rem",
+          padding: "10px",
+          fontFamily: "Roboto, sans-serif",
+        },
+      }}/>
     </ThemeProvider>
   );
 }

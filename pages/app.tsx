@@ -6,13 +6,16 @@ import { getDownloadURL, getMetadata, listAll, ref, StorageReference, uploadByte
   UploadMetadata, UploadTaskSnapshot, getBlob } from "firebase/storage";
 import { signInWithPopup } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast } from "react-hot-toast";
+import { useTheme } from "next-themes";
+
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 
 import UploadFileSection from "../components/App_Components/UploadFileSection";
 import { storage } from "../lib/firebase";
-import { DownloadForOfflineOutlined } from "@mui/icons-material";
 
 interface FileInfo {
   name: string;
@@ -21,6 +24,8 @@ interface FileInfo {
 }
 
 export default function App(): ReactElement {
+  const { theme } = useTheme();
+
   // Tracking user authentication state
   const [user, loading, error] = useAuthState(auth);
 
@@ -174,6 +179,15 @@ export default function App(): ReactElement {
     });
   }
 
+  // Toast the user when a document is copied
+  const successfulCopy = () => toast.success("Download link copied!", {
+    icon: "✅",
+    style: {
+      background: theme === "dark" ? "black" : "white",
+      color: theme === "dark" ? "white" : "black",
+    },
+  });
+
   interface FileActionProps {
     file: FileInfo;
   }
@@ -184,15 +198,21 @@ export default function App(): ReactElement {
         flex flex-col justify-start items-center gap-y-1 rounded-lg w-full
         p-3 bg-zinc-200 dark:bg-slate-600 font-heading break-all
       ">
+        {/* File name as header */}
         <div className="text-md">{file.name}</div>
+        {/* Action Buttons */}
         <div className="flex flex-row w-full p-1 gap-x-2 justify-between">
-          <Button className="
-            h-9 px-2 py-4 rounded-xl flex flex-row grow
-            bg-green-500 hover:bg-green-400"
-          variant="contained">
-            <span className="text-md hidden sm:block">Share</span>
-            <IosShareRoundedIcon fontSize="medium" className="block sm:hidden"/>
-          </Button>
+          {/* Share, copies to clipboard on click */}
+          <CopyToClipboard text={file.downloadUrl} onCopy={successfulCopy}>
+            <Button className="
+              h-9 px-2 py-4 rounded-xl flex flex-row grow
+              bg-green-500 hover:bg-green-400"
+            variant="contained">
+              <span className="text-md hidden sm:block">Share</span>
+              <IosShareRoundedIcon fontSize="medium" className="block sm:hidden"/>
+            </Button>
+          </CopyToClipboard>
+          {/* Directly download the file to the user's computer */}
           <Button className="
             h-9 px-2 py-4 rounded-xl flex flex-row grow
             bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
