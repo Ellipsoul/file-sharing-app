@@ -3,7 +3,7 @@ import { ReactElement, useEffect, useState } from "react";
 
 import { auth, googleAuthProvider } from "../lib/firebase";
 import { getDownloadURL, getMetadata, listAll, ref, StorageReference, uploadBytesResumable,
-  UploadMetadata, UploadTaskSnapshot, getBlob } from "firebase/storage";
+  UploadMetadata, UploadTaskSnapshot, getBlob, deleteObject } from "firebase/storage";
 import { signInWithPopup } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -104,7 +104,6 @@ export default function App(): ReactElement {
       () => {
         // Upload completed successfully, update state of files
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
-          console.log(downloadURL);
           setUploadedFiles((currentFiles) => [...currentFiles, {
             name: file!.name,
             downloadUrl: downloadURL,
@@ -112,6 +111,13 @@ export default function App(): ReactElement {
           }]);
           setUploadingFile(false);
           clearFile();
+          toast.success("File uploaded!", {
+            icon: "✅",
+            style: {
+              background: theme === "dark" ? "black" : "white",
+              color: theme === "dark" ? "white" : "black",
+            },
+          });
         });
       },
     );
@@ -188,6 +194,30 @@ export default function App(): ReactElement {
     },
   });
 
+  const deleteFile = (fileRef: StorageReference) => {
+    if (!confirm("Are you sure you want to delete this file?")) return;
+    deleteObject(fileRef).then(() => {
+      // Update local state of the files
+      setUploadedFiles((currentFiles) => currentFiles.filter((file) => file.reference !== fileRef));
+      toast.success("File deleted!", {
+        icon: "✅",
+        style: {
+          background: theme === "dark" ? "black" : "white",
+          color: theme === "dark" ? "white" : "black",
+        },
+      });
+    }).catch((error) => {
+      console.log(error);
+      toast.error("Error deleting file!", {
+        icon: "❌",
+        style: {
+          background: theme === "dark" ? "black" : "white",
+          color: theme === "dark" ? "white" : "black",
+        },
+      });
+    });
+  };
+
   interface FileActionProps {
     file: FileInfo;
   }
@@ -199,7 +229,7 @@ export default function App(): ReactElement {
         p-3 bg-zinc-200 dark:bg-slate-600 font-heading break-all
       ">
         {/* File name as header */}
-        <div className="text-md">{file.name}</div>
+        <div className="text-lg font-semibold">{file.name}</div>
         {/* Action Buttons */}
         <div className="flex flex-row w-full p-1 gap-x-2 justify-between">
           {/* Share, copies to clipboard on click */}
@@ -224,7 +254,8 @@ export default function App(): ReactElement {
           <Button className="
             h-9 px-2 py-4 rounded-xl flex flex-row grow
           bg-red-600 hover:bg-red-500"
-          variant="contained">
+          variant="contained"
+          onClick={() => deleteFile(file.reference)}>
             <span className="text-md hidden sm:block">Delete</span>
             <DeleteRoundedIcon fontSize="medium" className="block sm:hidden"/>
           </Button>
@@ -232,6 +263,7 @@ export default function App(): ReactElement {
       </div>
     );
   };
+
 
   // Right side for displaying the files uploaded
   const FileListSection = () => {

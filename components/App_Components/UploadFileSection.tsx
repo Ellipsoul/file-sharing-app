@@ -1,6 +1,7 @@
 import InsertDriveFileRoundedIcon from "@mui/icons-material/InsertDriveFileRounded";
 import { FileUploader } from "react-drag-drop-files";
 import { Button } from "@mui/material";
+import toast from "react-hot-toast";
 
 interface UploadFileSectionProps {
   file: File | null;
