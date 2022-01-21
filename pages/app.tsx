@@ -3,7 +3,7 @@ import { ReactElement, useEffect, useState } from "react";
 
 import { auth, googleAuthProvider } from "../lib/firebase";
 import { getDownloadURL, getMetadata, listAll, ref, StorageReference, uploadBytesResumable,
-  UploadMetadata, UploadTaskSnapshot } from "firebase/storage";
+  UploadMetadata, UploadTaskSnapshot, getBlob } from "firebase/storage";
 import { signInWithPopup } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
@@ -12,6 +12,7 @@ import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 
 import UploadFileSection from "../components/App_Components/UploadFileSection";
 import { storage } from "../lib/firebase";
+import { DownloadForOfflineOutlined } from "@mui/icons-material";
 
 interface FileInfo {
   name: string;
@@ -161,6 +162,18 @@ export default function App(): ReactElement {
     );
   }
 
+  // Download the file from firebase storage using the storage reference
+  function downloadFile(storageRef: StorageReference, fileName: string): void {
+    getBlob(storageRef).then((blob) => {
+      const url = window.URL.createObjectURL(blob); // Grab the url of the file
+      const a = document.createElement("a"); // Create a link element in the dom
+      a.href = url; // Add the url to the link element
+      a.download = fileName; // Add the file name to the link element
+      a.click(); // Click the element
+      a.remove(); // Clean up the element
+    });
+  }
+
   interface FileActionProps {
     file: FileInfo;
   }
@@ -183,7 +196,8 @@ export default function App(): ReactElement {
           <Button className="
             h-9 px-2 py-4 rounded-xl flex flex-row grow
             bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
-          variant="contained">
+          variant="contained"
+          onClick={() => downloadFile(file.reference, file.name)}>
             <span className="text-md text-white dark:text-black hidden sm:block">Download</span>
             <DownloadRoundedIcon fontSize="medium" className="block sm:hidden"/>
           </Button>
@@ -218,7 +232,6 @@ export default function App(): ReactElement {
           ))}
         </div>
         {user ? <SignOutButton /> : <GoogleSignInButton />}
-        <span>{user ? user.uid : "Signed Out"}</span>
         <span>{`Retrieving: ${retrievingFiles}`}</span>
       </section>
     );
