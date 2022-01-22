@@ -47,6 +47,7 @@ export default function App(): ReactElement {
 
   const [uploadingFile, setUploadingFile] = useState(false);
   const [retrievingFiles, setRetrievingFiles] = useState(false);
+  const [uploadFileProgress, setUploadFileProgress] = useState(0);
 
   const [uploadedFiles, setUploadedFiles] = useState<FileInfo[]>([]);
 
@@ -119,6 +120,7 @@ export default function App(): ReactElement {
       (snapshot: UploadTaskSnapshot) => {
         // Track progress of the upload
         const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadFileProgress(uploadProgress);
         console.log(`Upload is ${uploadProgress}% done`);
       },
       (error: Error) => console.error(error),
@@ -141,7 +143,6 @@ export default function App(): ReactElement {
           // Sign the user out if anonymous
           if (auth.currentUser!.isAnonymous) {
             auth.signOut();
-            console.log("Anonymous user signed out");
           };
         });
       },
@@ -152,7 +153,6 @@ export default function App(): ReactElement {
   const checkBeforeUploadFile = async () => {
     if (!user) {
       signInAnonymously(auth).then(() => {
-        console.log("Signed in anonymously");
         uploadFile();
       });
     } else {
@@ -176,18 +176,28 @@ export default function App(): ReactElement {
           aria-describedby="uploaded-file-dialog-description"
         >
           <DialogTitle id="uploaded-file-dialog-title" className="text-2xl">
-            Copied to Clipboard!
+            File Upload Success!
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="uploaded-file-dialog-description" className="text-lg">
-              {`File upload sucess! The download link has been copied to your clipboard.
-              ${!user || user.isAnonymous ?
-        "Please sign in with Google to save and manage your uploaded files!" :
-        "Thanks for logging in with Google! You can manage your files using the righthand panel"}`}
+              The shareable link has been copied to your clipboard
+            </DialogContentText>
+            <DialogContentText>
+              {!user || user.isAnonymous ?
+                "Please sign in with Google to save and manage your uploaded files!" :
+                `Thanks for logging in with Google!
+                You can manage your files using the righthand panel`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} autoFocus>Sounds Good</Button>
+            <Button
+              variant="outlined"
+              onClick={handleClose}
+              autoFocus
+              className="text-black"
+            >
+              Close
+            </Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -372,7 +382,7 @@ export default function App(): ReactElement {
               ))}
             </> :
             <div className="
-              w-full h-full grid place-items-center p-4
+              w-full h-full grid place-items-center p-8 lg:p-16
               font-mono text-3xl text-center
             ">
               Sign in with Google to save your uploaded files!
