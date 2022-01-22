@@ -9,6 +9,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-hot-toast";
 import { useTheme } from "next-themes";
+import { BallTriangle } from "react-loader-spinner";
 
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
@@ -25,6 +26,10 @@ interface FileInfo {
 
 export default function App(): ReactElement {
   const { theme } = useTheme();
+  const toasterStyle = {
+    background: theme === "dark" ? "black" : "white",
+    color: theme === "dark" ? "white" : "black",
+  };
 
   // Tracking user authentication state
   const [user, loading, error] = useAuthState(auth);
@@ -113,10 +118,7 @@ export default function App(): ReactElement {
           clearFile();
           toast.success("File uploaded!", {
             icon: "✅",
-            style: {
-              background: theme === "dark" ? "black" : "white",
-              color: theme === "dark" ? "white" : "black",
-            },
+            style: toasterStyle,
           });
         });
       },
@@ -188,10 +190,7 @@ export default function App(): ReactElement {
   // Toast the user when a document is copied
   const successfulCopy = () => toast.success("Download link copied!", {
     icon: "✅",
-    style: {
-      background: theme === "dark" ? "black" : "white",
-      color: theme === "dark" ? "white" : "black",
-    },
+    style: toasterStyle,
   });
 
   const deleteFile = (fileRef: StorageReference) => {
@@ -201,19 +200,13 @@ export default function App(): ReactElement {
       setUploadedFiles((currentFiles) => currentFiles.filter((file) => file.reference !== fileRef));
       toast.success("File deleted!", {
         icon: "✅",
-        style: {
-          background: theme === "dark" ? "black" : "white",
-          color: theme === "dark" ? "white" : "black",
-        },
+        style: toasterStyle,
       });
     }).catch((error) => {
       console.log(error);
       toast.error("Error deleting file!", {
         icon: "❌",
-        style: {
-          background: theme === "dark" ? "black" : "white",
-          color: theme === "dark" ? "white" : "black",
-        },
+        style: toasterStyle,
       });
     });
   };
@@ -249,7 +242,9 @@ export default function App(): ReactElement {
           variant="contained"
           onClick={() => downloadFile(file.reference, file.name)}>
             <span className="text-md text-white dark:text-black hidden sm:block">Download</span>
-            <DownloadRoundedIcon fontSize="medium" className="block sm:hidden"/>
+            <DownloadRoundedIcon
+              fontSize="medium"
+              className="block sm:hidden text-white dark:text-black"/>
           </Button>
           <Button className="
             h-9 px-2 py-4 rounded-xl flex flex-row grow
@@ -275,16 +270,26 @@ export default function App(): ReactElement {
       >
         <div className="font-serif text-center text-2xl md:text-3xl">Uploaded Files</div>
         <div className="
-          flex flex-col grow min-h-48 max-h-96 gap-y-2
+          flex flex-col grow min-h-48 gap-y-2 files-container
           border-2 border-zinc-300 rounded-lg p-3 overflow-y-scroll
         ">
+          {/* Display while loading files */}
+          { retrievingFiles &&
+            <div className="h-full w-full grid place-items-center">
+              <BallTriangle
+                height="100"
+                width="100"
+                ariaLabel="Loading Files"
+                color={theme === "dark" ? "white" : "black"}
+              />
+            </div>
+          }
           {/* Map the uploaded files to a file component */}
           {uploadedFiles.map((file, index) => (
             <FileActions file={file} key={index} />
           ))}
         </div>
         {user ? <SignOutButton /> : <GoogleSignInButton />}
-        <span>{`Retrieving: ${retrievingFiles}`}</span>
       </section>
     );
   };
@@ -299,6 +304,8 @@ export default function App(): ReactElement {
         setFile={setFile}
         clearFile={clearFile}
         uploadFile={uploadFile}
+        uploadingFile={uploadingFile}
+        theme={theme}
       />
       <FileListSection />
     </main>

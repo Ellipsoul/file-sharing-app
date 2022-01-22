@@ -23,4 +23,14 @@
     @apply border-4 border-dashed;
     @apply cursor-pointer;
   }
+
+  @media screen and (max-width: 768px) {
+    .files-container {
+      @apply max-h-96;
+    }
+  }
+
+  .files-container {
+    @apply max-h-144;
+  }
 }
