@@ -189,6 +189,10 @@ export default function App(): ReactElement {
     const signInWithGoogle = async () => {
       try {
         await signInWithPopup(auth, googleAuthProvider);
+        toast.success("Signed in with Google!", {
+          icon: "✅",
+          style: toasterStyle,
+        });
       } catch (error) {
         console.log(error);
       }
@@ -215,6 +219,10 @@ export default function App(): ReactElement {
     const signOut = async () => {
       try {
         await auth.signOut();
+        toast.success("Signed out!", {
+          icon: "🌇",
+          style: toasterStyle,
+        });
       } catch (error) {
         console.log(error);
       }
@@ -244,6 +252,10 @@ export default function App(): ReactElement {
       a.download = fileName; // Add the file name to the link element
       a.click(); // Click the element
       a.remove(); // Clean up the element
+      toast.success("File downloaded!", {
+        icon: "📁",
+        style: toasterStyle,
+      });
     });
   }
 
