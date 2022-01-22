@@ -8,7 +8,7 @@ export default function Navbar(): ReactElement {
   return (
     <AppBar position="static" className="
       flex flex-row items-center justify-between gap-x-3 md:gap-x-6 relative
-      h-20 md:h-24 pl-6 pr-4 md:pl-10 md:pr-10 bg-slate-50 dark:bg-slate-900
+      h-20 md:h-24 pl-6 pr-4 md:pl-10 md:pr-10 bg-slate-100 dark:bg-slate-900
     ">
       <Title />
       <div className="grow" /> {/* Separates title from buttons */}
