@@ -93,7 +93,7 @@ export default function UploadFileSection({
         disabled={!file}>
           <span
             className={ `${file ? "text-white" :
-              "text-neutral-200 dark:text-neutral-600"} text-2xl md:text-3xl block`}
+              "text-neutral-100"} text-2xl md:text-3xl block`}
           >
               Clear
           </span>
@@ -109,7 +109,7 @@ export default function UploadFileSection({
         >
           <span
             className={`${file ? "text-white" :
-              "text-neutral-200 dark:text-neutral-600"} text-2xl md:text-3xl block`}
+              "text-neutral-100"} text-2xl md:text-3xl block`}
           >
               Upload
           </span>

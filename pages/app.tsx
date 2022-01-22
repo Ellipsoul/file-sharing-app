@@ -89,6 +89,15 @@ export default function App(): ReactElement {
 
   // Uploads the file to firebase storage
   const uploadFile = async () => {
+    if (file!.size > 104_857_600) {
+      toast.error("File is too large", {
+        icon: "❌",
+        style: toasterStyle,
+      });
+      clearFile();
+      return;
+    }
+
     // Get the extension of the file
     const extension = file!.name.split(".").pop() || "";
 
@@ -173,7 +182,8 @@ export default function App(): ReactElement {
             <DialogContentText id="uploaded-file-dialog-description" className="text-lg">
               {`File upload sucess! The download link has been copied to your clipboard.
               ${!user || user.isAnonymous ?
-        "Please sign in with Google to save and manage your uploaded files!" : ""}`}
+        "Please sign in with Google to save and manage your uploaded files!" :
+        "Thanks for logging in with Google! You can manage your files using the righthand panel"}`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
