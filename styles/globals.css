@@ -23,4 +23,8 @@
     @apply border-4 border-dashed;
     @apply cursor-pointer;
   }
+
+  .about-containers {
+    @apply grow border border-green-300;
+  }
 }
