@@ -186,18 +186,18 @@ export default function App(): ReactElement {
         >
           {/* Important to inform about clipboard copy in title */}
           <DialogTitle id="uploaded-file-dialog-title" className="text-2xl">
-            Uploaded and Copied to Clipboard!
+            File Uploaded!
           </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="uploaded-file-dialog-description" className="text-lg">
-              File uploaded successfully! The shareable link has been copied to your clipboard
+          <DialogContent className="flex flex-col justify-start items-start gap-y-4">
+            <DialogContentText id="uploaded-file-dialog-description" className="text-lg text-black">
+              The shareable link has been copied to your clipboard
             </DialogContentText>
             {/* Encourage user to sign in with Google, or thank them if they have */}
-            <DialogContentText>
+            <DialogContentText className="text-md text-black">
               {!user || user.isAnonymous ?
                 "Please sign in with Google to save and manage your uploaded files!" :
-                `Thanks for logging in with Google!
-                You can manage your files using the righthand panel`}
+                `Thank you for logging in with Google!
+                You can manage your uploaded files using the right-hand panel`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
