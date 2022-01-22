@@ -337,7 +337,7 @@ export default function App(): ReactElement {
     return (
       <div className="
         flex flex-col justify-start items-center gap-y-1 rounded-lg w-full
-        p-3 bg-zinc-200 dark:bg-slate-600 font-heading tracking-wider break-all
+        p-3 bg-slate-300 dark:bg-slate-600 font-heading tracking-wider break-all
       ">
         {/* File name as header */}
         <div className="text-lg font-semibold">{file.name}</div>

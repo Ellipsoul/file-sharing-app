@@ -89,12 +89,12 @@ export default function UploadFileSection({
       {/* Clear and Upload File Buttons */}
       <div className="flex flex-row justify-evenly items-center px-2 gap-4">
         {/* Clear */}
-        <Button className="
-            h-16 md:h-24 px-4 py-2 rounded-xl flex flex-row grow
-          bg-red-600 hover:bg-red-500"
-        variant="contained"
-        onClick={clearFile}
-        disabled={!file}>
+        <Button
+          className={`h-16 md:h-24 px-4 py-2 rounded-xl flex flex-row grow
+          ${file ? "bg-red-600 hover:bg-red-500" : "bg-neutral-300 dark:bg-neutral-700"}`}
+          variant="contained"
+          onClick={clearFile}
+          disabled={!file}>
           <span
             className={ `${file ? "text-white" :
               "text-neutral-100"} text-2xl md:text-3xl block`}
@@ -104,9 +104,8 @@ export default function UploadFileSection({
         </Button>
         {/* Upload */}
         <Button
-          className="
-              h-16 md:h-24 px-4 py-2 rounded-xl
-              flex flex-row grow-2 bg-green-500 hover:bg-green-400"
+          className={ `h-16 md:h-24 px-4 py-2 rounded-xl flex flex-row grow-2 
+          ${file ? "bg-green-500 hover:bg-green-400" : "bg-neutral-300 dark:bg-neutral-700"}`}
           variant="contained"
           disabled={!file}
           onClick={checkBeforeUploadFile}

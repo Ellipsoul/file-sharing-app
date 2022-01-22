@@ -24,11 +24,11 @@ export default function About(): ReactElement {
             Welcome
         </div>
         <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
-          Turbofile is an app that allows you to share large files with anyone in
+          TurboFile is an app that allows you to share large files with anyone in
           just a few clicks.
         </div>
         <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
-          No authentication is necessary, just drag, drop, and your file is ready to be shared!
+          No authentication is necessary. Drag, drop, upload and your file is ready to be shared!
         </div>
         <Link href='/app'>
           <Button
