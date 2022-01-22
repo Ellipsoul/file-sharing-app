@@ -10,7 +10,7 @@ export default function Title(): ReactElement {
     text-black dark:text-white font-slogan text-lg
     self-end pb-4 whitespace-nowrap hidden lg:block"
       >
-    One-drag file sharing
+    Instant file sharing
       </span>
     </>
   );
