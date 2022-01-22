@@ -120,6 +120,7 @@ export default function Actions(): ReactElement {
           <MenuIcon className="text-slate-800 dark:text-white"/>
         </Button>
         <Menu
+          className="block tiny:hidden"
           id="basic-menu"
           anchorEl={anchorEl}
           open={open}
