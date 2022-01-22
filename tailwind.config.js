@@ -15,6 +15,7 @@ module.exports = {
       spacing: {
         114: "28rem",
         "9/20": "45%",
+        custom: "83vh",
       },
       minHeight: {
         48: "12rem",

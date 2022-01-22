@@ -166,18 +166,18 @@ export default function App(): ReactElement {
           aria-labelledby="uploaded-file-dialog-title"
           aria-describedby="uploaded-file-dialog-description"
         >
-          <DialogTitle id="uploaded-file-dialog-title">
-            Successfully Uploaded File!
+          <DialogTitle id="uploaded-file-dialog-title" className="text-2xl">
+            Copied to Clipboard!
           </DialogTitle>
           <DialogContent>
-            <DialogContentText id="uploaded-file-dialog-description">
-              {`The download link has been copied to your clipboard.
+            <DialogContentText id="uploaded-file-dialog-description" className="text-lg">
+              {`File upload sucess! The download link has been copied to your clipboard.
               ${!user || user.isAnonymous ?
         "Please sign in with Google to save and manage your uploaded files!" : ""}`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleClose} autoFocus>Close</Button>
+            <Button onClick={handleClose} autoFocus>Sounds Good</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -337,12 +337,12 @@ export default function App(): ReactElement {
     return (
       <section className="
       bg-neutral-100 dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-600
-        flex flex-col justify-start items-stretch gap-y-2 md:gap-y-4 grow md:grow-0
-        w-full max-h-full md:w-9/20 p-2 md:p-4 drop-shadow-xl"
+        flex flex-col justify-start items-stretch gap-y-2 md:gap-y-4 md:grow-0 md:max-h-custom
+        w-full md:w-9/20 p-2 md:p-4 drop-shadow-xl"
       >
-        <div className="font-serif text-center text-2xl md:text-3xl">Uploaded Files</div>
+        <div className="font-serif text-center text-2xl md:text-3xl font-bold">Uploaded Files</div>
         <div className="
-          flex flex-col grow min-h-48 gap-y-2 files-container max-h-114
+          flex flex-col grow min-h-48 gap-y-2 files-container
           border-2 border-zinc-300 rounded-lg p-3 overflow-y-scroll
         ">
           { (user && !user.isAnonymous) ?

@@ -37,7 +37,7 @@ export default function UploadFileSection({
     >
       {/* Header */}
       <header className="
-          font-heading text-3xl md:text-4xl text-black dark:text-white text-center">
+          font-heading font-semibold text-3xl md:text-4xl text-black dark:text-white text-center">
           Upload File
       </header>
       {/* Show a loader while file is uploading */}

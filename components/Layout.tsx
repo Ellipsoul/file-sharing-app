@@ -8,7 +8,7 @@ interface Props {
 export default function Layout({ children }: Props) {
   return (
     <div className='
-      flex flex-col min-h-screen w-full
+      flex flex-col min-h-screen w-full md:max-h-screen overflow-hidden
       bg-slate-100 dark:bg-slate-800
       overflow-x-hidden overflow-y-auto'>
       <Navbar />
