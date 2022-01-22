@@ -10,6 +10,11 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-hot-toast";
 import { useTheme } from "next-themes";
 import { BallTriangle } from "react-loader-spinner";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
@@ -120,10 +125,43 @@ export default function App(): ReactElement {
             icon: "✅",
             style: toasterStyle,
           });
+          setOpenDialog(true);
+          navigator.clipboard.writeText(downloadURL); // Copy to clipboard
         });
       },
     );
   };
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleClose = () => {
+    setOpenDialog(false);
+  };
+
+  function UploadedDialog(): ReactElement {
+    return (
+      <div>
+        <Dialog
+          open={openDialog}
+          onClose={handleClose}
+          aria-labelledby="uploaded-file-dialog-title"
+          aria-describedby="uploaded-file-dialog-description"
+        >
+          <DialogTitle id="uploaded-file-dialog-title">
+            Successfully Uploaded File!
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="uploaded-file-dialog-description">
+              The download link has been copied to your clipboard
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} autoFocus>Close</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
 
   // Button for Google Sign In
   function GoogleSignInButton(): ReactElement {
@@ -308,6 +346,7 @@ export default function App(): ReactElement {
         theme={theme}
       />
       <FileListSection />
+      <UploadedDialog />
     </main>
   );
 }
