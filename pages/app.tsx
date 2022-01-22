@@ -382,7 +382,7 @@ export default function App(): ReactElement {
               ))}
             </> :
             <div className="
-              w-full h-full grid place-items-center p-8 lg:p-16
+              relative w-full h-full grid place-items-center p-8 lg:p-16
               font-mono text-3xl text-center
             ">
               Sign in with Google to save your uploaded files!
