@@ -4,7 +4,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { auth, googleAuthProvider } from "../lib/firebase";
 import { getDownloadURL, getMetadata, listAll, ref, StorageReference, uploadBytesResumable,
   UploadMetadata, UploadTaskSnapshot, getBlob, deleteObject } from "firebase/storage";
-import { signInWithPopup } from "firebase/auth";
+import { signInAnonymously, signInWithPopup } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-hot-toast";
@@ -86,14 +86,15 @@ export default function App(): ReactElement {
     fetchUploadedFiles();
   }, [user]);
 
+
   // Uploads the file to firebase storage
   const uploadFile = async () => {
-    // TODO: Sign in anonymously if the user is not signed in
-    if (!user) {
-      throw new Error("User not logged in");
-    }
+    // Get the extension of the file
+    const extension = file!.name.split(".").pop() || "";
+
     // Create the file reference with the unique unix timestamp
-    const fileRef: StorageReference = ref(storage, `${user.uid}/${Date.now()}`);
+    const fileRef: StorageReference =
+      ref(storage, `${auth.currentUser!.uid}/${Date.now()}.${extension}`);
     const metaData: UploadMetadata = {
       contentType: file!.type,
       customMetadata: {
@@ -128,9 +129,26 @@ export default function App(): ReactElement {
           });
           setOpenDialog(true);
           navigator.clipboard.writeText(downloadURL); // Copy to clipboard
+          // Sign the user out if anonymous
+          if (auth.currentUser!.isAnonymous) {
+            auth.signOut();
+            console.log("Anonymous user signed out");
+          };
         });
       },
     );
+  };
+
+  // Check if the user is signed in before uploading a file
+  const checkBeforeUploadFile = async () => {
+    if (!user) {
+      signInAnonymously(auth).then(() => {
+        console.log("Signed in anonymously");
+        uploadFile();
+      });
+    } else {
+      uploadFile();
+    }
   };
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -153,7 +171,9 @@ export default function App(): ReactElement {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="uploaded-file-dialog-description">
-              The download link has been copied to your clipboard
+              {`The download link has been copied to your clipboard.
+              ${!user || user.isAnonymous ?
+        "Please sign in with Google to save and manage your uploaded files!" : ""}`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -305,12 +325,12 @@ export default function App(): ReactElement {
     return (
       <section className="
       bg-neutral-100 dark:bg-neutral-800 border-2 border-neutral-300 dark:border-neutral-600
-        flex flex-col justify-start items-stretch gap-y-2 md:gap-y-4
+        flex flex-col justify-start items-stretch gap-y-2 md:gap-y-4 grow md:grow-0
         w-full max-h-full md:w-9/20 p-2 md:p-4 drop-shadow-xl"
       >
         <div className="font-serif text-center text-2xl md:text-3xl">Uploaded Files</div>
         <div className="
-          flex flex-col grow min-h-48 gap-y-2 files-container
+          flex flex-col grow min-h-48 gap-y-2 files-container max-h-114
           border-2 border-zinc-300 rounded-lg p-3 overflow-y-scroll
         ">
           { (user && !user.isAnonymous) ?
@@ -352,7 +372,7 @@ export default function App(): ReactElement {
         file={file}
         setFile={setFile}
         clearFile={clearFile}
-        uploadFile={uploadFile}
+        checkBeforeUploadFile={checkBeforeUploadFile}
         uploadingFile={uploadingFile}
         theme={theme}
       />

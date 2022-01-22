@@ -13,8 +13,7 @@ module.exports = {
         tiny: "475px",
       },
       spacing: {
-        128: "32rem",
-        144: "36rem",
+        114: "28rem",
         "9/20": "45%",
       },
       minHeight: {

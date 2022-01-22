@@ -7,14 +7,14 @@ interface UploadFileSectionProps {
   file: File | null;
   setFile: (file: File | null) => void;
   clearFile: () => void;
-  uploadFile: () => Promise<void>;
+  checkBeforeUploadFile: () => Promise<void>;
   uploadingFile: boolean;
   theme: string | undefined;
 }
 
 // Left side for uploading a file
 export default function UploadFileSection({
-  file, setFile, clearFile, uploadFile, uploadingFile, theme,
+  file, setFile, clearFile, checkBeforeUploadFile, uploadingFile, theme,
 }: UploadFileSectionProps) {
   // Runs whenever a file is uploaded
   const handleFileDrop = (file: File) => setFile(file);
@@ -105,7 +105,7 @@ export default function UploadFileSection({
               flex flex-row grow-2 bg-green-500 hover:bg-green-400"
           variant="contained"
           disabled={!file}
-          onClick={uploadFile}
+          onClick={checkBeforeUploadFile}
         >
           <span
             className={`${file ? "text-white" :
