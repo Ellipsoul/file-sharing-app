@@ -17,3 +17,4 @@ View more of my projects on my personal [website](https://aronteh.com/).
 - [TailwindCSS 3](https://tailwindcss.com/)
 - [Firebase](https://firebase.google.com/) (Storage, Auth)
 
+Project Finished on: 22 January 2022
