@@ -19,6 +19,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import IosShareRoundedIcon from "@mui/icons-material/IosShareRounded";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import GoogleIcon from "@mui/icons-material/Google";
 
 import UploadFileSection from "../components/App_Components/UploadFileSection";
 import { storage } from "../lib/firebase";
@@ -51,7 +52,7 @@ export default function App(): ReactElement {
 
   // Retrieves the uploaded files for the user on load
   useEffect(() => {
-    if (!user || uploadedFiles.length) return;
+    if (!user || user.isAnonymous || uploadedFiles.length) return;
     setRetrievingFiles(true);
     const listRef = ref(storage, user.uid);
 
@@ -87,7 +88,7 @@ export default function App(): ReactElement {
 
   // Uploads the file to firebase storage
   const uploadFile = async () => {
-    // Temporarily don't allow non-authenticated users to upload files
+    // TODO: Sign in anonymously if the user is not signed in
     if (!user) {
       throw new Error("User not logged in");
     }
@@ -176,11 +177,12 @@ export default function App(): ReactElement {
     return (
       <Button
         className="
-        px-4 py-2 rounded-xl flex flex-col
+        px-4 py-2 rounded-xl flex flex-row gap-x-3 items-start
         bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
         variant="contained"
         color="primary"
         onClick={signInWithGoogle}>
+        <span className="text-white dark:text-black"><GoogleIcon /></span>
         <span className="text-white dark:text-slate-800 text-lg block">
           Sign in With Google
         </span>
@@ -311,21 +313,30 @@ export default function App(): ReactElement {
           flex flex-col grow min-h-48 gap-y-2 files-container
           border-2 border-zinc-300 rounded-lg p-3 overflow-y-scroll
         ">
-          {/* Display while loading files */}
-          { retrievingFiles &&
-            <div className="h-full w-full grid place-items-center">
-              <BallTriangle
-                height="100"
-                width="100"
-                ariaLabel="Loading Files"
-                color={theme === "dark" ? "white" : "black"}
-              />
+          { (user && !user.isAnonymous) ?
+            <>
+              { retrievingFiles &&
+                <div className="h-full w-full grid place-items-center">
+                  <BallTriangle
+                    height="100"
+                    width="100"
+                    ariaLabel="Loading Files"
+                    color={theme === "dark" ? "white" : "black"}
+                  />
+                </div>
+              }
+              { uploadedFiles.map((file, index) => (
+                <FileActions file={file} key={index} />
+              ))}
+            </> :
+            <div className="
+              w-full h-full grid place-items-center p-4
+              font-mono text-3xl text-center
+            ">
+              Sign in with Google to save your uploaded files!
             </div>
           }
-          {/* Map the uploaded files to a file component */}
-          {uploadedFiles.map((file, index) => (
-            <FileActions file={file} key={index} />
-          ))}
+
         </div>
         {user ? <SignOutButton /> : <GoogleSignInButton />}
       </section>
