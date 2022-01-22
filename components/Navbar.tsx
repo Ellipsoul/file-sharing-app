@@ -5,6 +5,7 @@ import Title from "./Navbar_Components/Title";
 import Actions from "./Navbar_Components/Actions";
 
 export default function Navbar(): ReactElement {
+  // Divide navbar into title and action buttons
   return (
     <AppBar position="static" className="
       flex flex-row items-center justify-between gap-x-3 md:gap-x-6 relative

@@ -5,6 +5,7 @@ interface Props {
   description?: string;
 }
 
+// For SEO purposes
 export default function Metatags({
   title = "TurboFile",
   description = "File sharing in seconds",

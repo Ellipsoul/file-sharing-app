@@ -16,6 +16,7 @@
 }
 
 @layer components {
+  /* Large contianer that users drop files into */
   .file-uploader {
     @apply flex items-center justify-center grow min-h-48 min-w-full !important;
     @apply bg-neutral-200 dark:bg-neutral-700;
@@ -24,6 +25,7 @@
     @apply cursor-pointer;
   }
 
+  /* 2 large containers in the landing page */
   .about-containers {
     @apply basis-1/2 flex flex-col justify-between md:justify-evenly items-center p-8;
     @apply gap-y-6 gap-x-16 bg-zinc-200 dark:bg-slate-700 grow;

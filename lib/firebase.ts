@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
+// Firebase configurations and objects
 const firebaseConfig = {
   apiKey: "AIzaSyAG8Ko9FLtoq9Tr6jq7wS0l90xBpR-G7Xo",
   authDomain: "file-sharing-app-769e7.firebaseapp.com",

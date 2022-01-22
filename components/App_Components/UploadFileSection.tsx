@@ -13,7 +13,7 @@ interface UploadFileSectionProps {
   uploadFileProgress: number;
 }
 
-// Left side for uploading a file
+// Left side component for uploading a file
 export default function UploadFileSection({
   file, setFile, clearFile, checkBeforeUploadFile, uploadingFile, theme, uploadFileProgress,
 }: UploadFileSectionProps) {
@@ -52,6 +52,7 @@ export default function UploadFileSection({
           />
           <span className="font-slogan text-4xl">{uploadFileProgress}%</span>
         </div> :
+        // Otherwise show the file uploader
         <FileUploader
           name="file"
           label={file?.name || "No file selected"}
@@ -63,6 +64,7 @@ export default function UploadFileSection({
               "border-zinc-300 dark:border-zinc-500" }`}
           hoverTitle=" "
         >
+          {/* Display information about the currently uploaded file */}
           { file ?
             <div className="
               flex flex-col h-full justify-evenly items-center p-3 sm:p-6 md:p-12
@@ -97,7 +99,7 @@ export default function UploadFileSection({
             className={ `${file ? "text-white" :
               "text-neutral-100"} text-2xl md:text-3xl block`}
           >
-              Clear
+            Clear
           </span>
         </Button>
         {/* Upload */}
@@ -110,10 +112,9 @@ export default function UploadFileSection({
           onClick={checkBeforeUploadFile}
         >
           <span
-            className={`${file ? "text-white" :
-              "text-neutral-100"} text-2xl md:text-3xl block`}
+            className={`${file ? "text-white" : "text-neutral-100"} text-2xl md:text-3xl block`}
           >
-              Upload
+            Upload
           </span>
         </Button>
       </div>

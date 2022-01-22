@@ -5,6 +5,7 @@ interface Props {
   children: any;
 }
 
+// This layout is mounted to the app root
 export default function Layout({ children }: Props) {
   return (
     <div className='

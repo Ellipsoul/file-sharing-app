@@ -18,11 +18,11 @@ export default function Actions(): ReactElement {
   const { theme, setTheme } = useTheme();
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
-    // closeMenu();
   };
 
   const loaded = useLoaded(); // Custom hook to check if the page is loaded
 
+  // Button that routes to the main file sharing page
   const AppPageButton = () => {
     return (
       <Link href="/app">
@@ -48,6 +48,7 @@ export default function Actions(): ReactElement {
     );
   };
 
+  // Button that routes to the about landing page
   const AboutPageButton = () => {
     return (
       <Link href="/about">
@@ -73,6 +74,7 @@ export default function Actions(): ReactElement {
     );
   };
 
+  // Classic theme toggler button
   const ToggleThemeButton = () => {
     return (
       <Button
@@ -90,6 +92,7 @@ export default function Actions(): ReactElement {
     );
   };
 
+  // Menu with all action buttons for small screens
   const ActionsMenu = () => {
     // Handle menu close
     const closeMenu = () => {

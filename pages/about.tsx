@@ -4,12 +4,14 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 
+// Landing page
 export default function About(): ReactElement {
   const { theme } = useTheme();
 
   return (
     <main className='
       grow flex flex-col md:flex-row justify-evenly items-stretch gap-x-5 gap-y-5 md:px-10'>
+      {/* First container has welcome, info and redirect to main app page */}
       <div className="about-containers">
         <Image
           src={"/turbofile-logo.png"}
@@ -42,6 +44,7 @@ export default function About(): ReactElement {
           </Button>
         </Link>
       </div>
+      {/* Second container has information about me and external links */}
       <div className="about-containers justify-evenly">
         <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
           Hi! I am Aron Teh
