@@ -119,7 +119,7 @@ export default function App(): ReactElement {
     uploadTask.on("state_changed",
       (snapshot: UploadTaskSnapshot) => {
         // Track progress of the upload
-        const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const uploadProgress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         setUploadFileProgress(uploadProgress);
         console.log(`Upload is ${uploadProgress}% done`);
       },
@@ -176,11 +176,11 @@ export default function App(): ReactElement {
           aria-describedby="uploaded-file-dialog-description"
         >
           <DialogTitle id="uploaded-file-dialog-title" className="text-2xl">
-            File Upload Success!
+            Uploaded and Copied to Clipboard!
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="uploaded-file-dialog-description" className="text-lg">
-              The shareable link has been copied to your clipboard
+              File uploaded successfully! The shareable link has been copied to your clipboard
             </DialogContentText>
             <DialogContentText>
               {!user || user.isAnonymous ?
@@ -407,6 +407,7 @@ export default function App(): ReactElement {
         checkBeforeUploadFile={checkBeforeUploadFile}
         uploadingFile={uploadingFile}
         theme={theme}
+        uploadFileProgress={uploadFileProgress}
       />
       <FileListSection />
       <UploadedDialog />

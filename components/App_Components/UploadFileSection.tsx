@@ -10,11 +10,12 @@ interface UploadFileSectionProps {
   checkBeforeUploadFile: () => Promise<void>;
   uploadingFile: boolean;
   theme: string | undefined;
+  uploadFileProgress: number;
 }
 
 // Left side for uploading a file
 export default function UploadFileSection({
-  file, setFile, clearFile, checkBeforeUploadFile, uploadingFile, theme,
+  file, setFile, clearFile, checkBeforeUploadFile, uploadingFile, theme, uploadFileProgress,
 }: UploadFileSectionProps) {
   // Runs whenever a file is uploaded
   const handleFileDrop = (file: File) => setFile(file);
@@ -42,13 +43,14 @@ export default function UploadFileSection({
       </header>
       {/* Show a loader while file is uploading */}
       { uploadingFile ?
-        <div className="w-full h-full grid place-items-center">
+        <div className="w-full h-full flex flex-col justify-center items-center gap-y-10">
           <BallTriangle
             height="100"
             width="100"
             ariaLabel="Loading Files"
             color={theme === "dark" ? "white" : "black"}
           />
+          <span className="font-slogan text-4xl">{uploadFileProgress}%</span>
         </div> :
         <FileUploader
           name="file"
