@@ -138,11 +138,14 @@ export default function App(): ReactElement {
       () => {
         // Upload completed successfully, update local state of files
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
-          setUploadedFiles((currentFiles) => [...currentFiles, {
-            name: file!.name,
-            downloadUrl: downloadURL,
-            reference: fileRef,
-          }]);
+          // Upload local state only if user is not anonymous
+          if (!user!.isAnonymous) {
+            setUploadedFiles((currentFiles) => [...currentFiles, {
+              name: file!.name,
+              downloadUrl: downloadURL,
+              reference: fileRef,
+            }]);
+          }
           setUploadingFile(false); // Mark file upload as complete
           clearFile(); // Clear the file state
           toast.success("File uploaded!", {
