@@ -47,10 +47,10 @@ export default function About(): ReactElement {
       {/* Second container has information about me and external links */}
       <div className="about-containers justify-evenly">
         <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
-          Hi! I am Aron Teh
+          Hi! I am Aron Teh.
         </div>
         <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
-          I build small projects like this in my free time to learn and explore new technologies
+          I build small projects like this in my free time to learn and explore new technologies.
         </div>
         <a href="https://github.com/Ellipsoul/" target="_blank" rel="noreferrer">
           <div className="flex flex-col justify-between items-center gap-y-4">
