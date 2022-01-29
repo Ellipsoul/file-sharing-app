@@ -139,7 +139,7 @@ export default function App(): ReactElement {
         // Upload completed successfully, update local state of files
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL: string) => {
           // Upload local state only if user is not anonymous
-          if (!user!.isAnonymous) {
+          if (!user?.isAnonymous) {
             setUploadedFiles((currentFiles) => [...currentFiles, {
               name: file!.name,
               downloadUrl: downloadURL,
