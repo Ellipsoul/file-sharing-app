@@ -66,7 +66,7 @@ export default function About(): ReactElement {
             </div>
           </div>
         </a>
-        <a href="https://www.linkedin.com/in/aronteh/" target="_blank" rel="noreferrer">
+        <a href="https://www.linkedin.com/in/aronteh/file-sharing-app" target="_blank" rel="noreferrer">
           <div className="flex flex-col justify-between items-center gap-y-4">
             <Image
               src={ theme === "light" ? "/linkedin-normal.png" : "/linkedin-white.png" }
