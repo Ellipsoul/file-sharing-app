@@ -52,7 +52,7 @@ export default function About(): ReactElement {
         <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
           I build small projects like this in my free time to learn and explore new technologies.
         </div>
-        <a href="https://github.com/Ellipsoul/" target="_blank" rel="noreferrer">
+        <a href="https://github.com/Ellipsoul/file-sharing-app/" target="_blank" rel="noreferrer">
           <div className="flex flex-col justify-between items-center gap-y-4">
             <Image
               src={ theme === "light" ? "/github-dark.png" : "/github-light.png" }
@@ -66,7 +66,7 @@ export default function About(): ReactElement {
             </div>
           </div>
         </a>
-        <a href="https://www.linkedin.com/in/aronteh/file-sharing-app" target="_blank" rel="noreferrer">
+        <a href="https://www.linkedin.com/in/aronteh/" target="_blank" rel="noreferrer">
           <div className="flex flex-col justify-between items-center gap-y-4">
             <Image
               src={ theme === "light" ? "/linkedin-normal.png" : "/linkedin-white.png" }
