@@ -37,8 +37,11 @@ export default function UploadFileSection({
           p-2 md:p-4 drop-shadow-xl"
     >
       {/* Header */}
-      <header className="
-          font-heading font-semibold text-3xl md:text-4xl text-black dark:text-white text-center">
+      <header
+        className=
+          "font-heading font-semibold text-3xl md:text-4xl text-black dark:text-white text-center"
+        id="upload-file-header"
+      >
           Upload File
       </header>
       {/* Show a loader while file is uploading */}
@@ -80,8 +83,8 @@ export default function UploadFileSection({
             flex flex-col h-full justify-evenly items-center p-6 sm:p-12
             text-2xl md:text-3xl lg:text-4xl text-center font-slogan font-light
             text-black dark:text-white">
-              <div className="">Drag&apos;n&apos;Drop File Here</div>
-              <div className="">Max Size: 100MB</div>
+              <div id="drag-file-description">Drag&apos;n&apos;Drop File Here</div>
+              <div id="max-size-description">Max Size: 100MB</div>
             </div>
           }
         </FileUploader>
@@ -104,7 +107,7 @@ export default function UploadFileSection({
         </Button>
         {/* Upload */}
         <Button
-          className={ `h-16 md:h-24 px-4 py-2 rounded-xl flex flex-row grow-2 
+          className={ `h-16 md:h-24 px-4 py-2 rounded-xl flex flex-row grow-2
           ${file ? "bg-green-500 hover:bg-green-400" : "bg-neutral-300 dark:bg-neutral-700"}`}
           variant="contained"
           disabled={!file}

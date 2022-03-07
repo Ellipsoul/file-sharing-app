@@ -388,7 +388,12 @@ export default function App(): ReactElement {
         flex flex-col justify-start items-stretch gap-y-2 md:gap-y-4 md:grow-0 md:max-h-custom
         w-full md:w-9/20 p-2 md:p-4 drop-shadow-xl"
       >
-        <div className="font-serif text-center text-2xl md:text-3xl font-bold">Uploaded Files</div>
+        <div
+          className="font-serif text-center text-2xl md:text-3xl font-bold"
+          id="uploaded-files-header"
+        >
+          Uploaded Files
+        </div>
         <div className="
           flex flex-col grow min-h-48 gap-y-2 files-container
           border-2 border-zinc-300 rounded-lg p-3 overflow-y-scroll

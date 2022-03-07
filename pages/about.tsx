@@ -20,14 +20,14 @@ export default function About(): ReactElement {
           width={200}
           height={200}
         />
-        <div className="font-heading text-6xl lg:text-7xl text-center w-fit">
+        <div className="font-heading text-6xl lg:text-7xl text-center w-fit" id="welcome-text">
             Welcome
         </div>
-        <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
+        <div className="font-serif text-2xl lg:text-4xl text-center w-fit" id="description-1">
           TurboFile is an app that allows you to share large files with anyone in
           just a few clicks.
         </div>
-        <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
+        <div className="font-serif text-2xl lg:text-4xl text-center w-fit" id="description-2">
           No authentication is necessary. Drag, drop, upload and your file is ready to be shared!
         </div>
         <Link href='/app'>
@@ -38,7 +38,9 @@ export default function About(): ReactElement {
             variant="contained"
             color="primary"
           >
-            <span className="text-white dark:text-slate-800 text-3xl block">
+            <span
+              className="text-white dark:text-slate-800 text-3xl block"
+              id="start-sharing-button">
               Start Sharing
             </span>
           </Button>
@@ -46,10 +48,10 @@ export default function About(): ReactElement {
       </div>
       {/* Second container has information about me and external links */}
       <div className="about-containers justify-evenly">
-        <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
+        <div className="font-serif text-2xl lg:text-4xl text-center w-fit" id="greeting">
           Hi! I am Aron Teh.
         </div>
-        <div className="font-serif text-2xl lg:text-4xl text-center w-fit">
+        <div className="font-serif text-2xl lg:text-4xl text-center w-fit" id="self-introduction">
           I build small projects like this in my free time to learn and explore new technologies.
         </div>
         <a href="https://github.com/Ellipsoul/file-sharing-app/" target="_blank" rel="noreferrer">

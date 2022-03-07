@@ -28,10 +28,12 @@ export default function Actions(): ReactElement {
       <Link href="/app">
         <Button
           className="
-      px-4 py-2 rounded-xl hidden tiny:flex flex-col
-      bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
+            px-4 py-2 rounded-xl hidden tiny:flex flex-col
+          bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
+          id="app-button"
           variant="contained"
-          color="primary">
+          color="primary"
+        >
           <FolderSharedRoundedIcon
             className="text-slate-100 dark:text-slate-800 block md:hidden"
             fontSize="large"
@@ -54,8 +56,9 @@ export default function Actions(): ReactElement {
       <Link href="/about">
         <Button
           className="
-          px-4 py-2 rounded-xl hidden tiny:flex flex-col
-          bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
+            px-4 py-2 rounded-xl hidden tiny:flex flex-col
+            bg-slate-700 dark:bg-slate-50 hover:bg-slate-800 dark:hover:bg-slate-200"
+          id="about-button"
           variant="contained"
           color="primary">
           <InfoRoundedIcon
